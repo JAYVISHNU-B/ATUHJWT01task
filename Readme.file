@@ -1,0 +1,105 @@
+User Authentication and Authorization with Bearer Token
+This project is a Node.js application that implements user authentication and authorization using Bearer tokens. It allows users to register and log in, generating a JWT upon successful login. The application uses MongoDB for data storage, follows the MVC pattern, and includes JWT-protected routes to retrieve user information.
+
+Project Structure
+The application is organized as follows:
+
+Controllers: Contains logic for handling requests.
+Models: Defines the MongoDB schema.
+Routes: Handles API routes and middleware.
+Middlewares: Includes JWT verification middleware.
+Features
+User Registration: Users can register by providing a username, email, and password.
+User Login: Registered users can log in to receive a JWT.
+JWT-based Authorization: Protected routes accessible only with a valid JWT.
+Error Handling: Provides appropriate error responses for various cases.
+
+Tech Stack
+Node.js: Server environment.
+Express.js: Web framework.
+Mongoose: MongoDB object modeling.
+JWT (jsonwebtoken): Token-based authentication.
+Bcrypt: Password hashing.
+Setup Instructions
+Clone the Repository:
+
+bash
+Copy code
+git clone https://github.com/your-username/auth-app.git
+cd auth-app
+Install Dependencies:
+
+bash
+Copy code
+npm install
+Set Environment Variables:
+
+Create a .env file in the root directory.
+Add the following environment variables:
+plaintext
+Copy code
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+Run the Application:
+
+bash
+
+Copy code
+npm start
+The server will start on the specified port (default: 5000).
+API Endpoints
+1. User Registration
+URL: POST /api/auth/register
+Description: Registers a new user.
+Request Body:
+json
+Copy code
+{
+  "username": "yourUsername",
+  "email": "yourEmail",
+  "password": "yourPassword"
+}
+Response:
+json
+Copy code
+{
+  "message": "User registered successfully"
+}
+2. User Login
+URL: POST /api/auth/login
+Description: Logs in a user and returns a JWT.
+Request Body:
+json
+Copy code
+{
+  "email": "yourEmail",
+  "password": "yourPassword"
+}
+Response:
+json
+Copy code
+{
+  "token": "yourJWTToken"
+}
+Get User Information (Protected)
+URL: GET /api/auth/user
+
+Description: Retrieves the authenticated user's information.
+Headers:
+plaintext
+Copy code
+
+Authorization: Bearer yourJWTToken
+Response:
+json
+Copy code
+{
+  "userId": "user_id_from_token"
+}
+
+Error Handling
+Appropriate error messages are returned for:
+
+Invalid credentials during login.
+Missing or invalid JWT for protected routes.
